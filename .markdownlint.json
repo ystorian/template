@@ -1,0 +1,15 @@
+{
+	"default": true,
+	"MD010": {
+		"code_blocks": false
+	},
+	"MD013": {
+		"code_blocks": false
+	},
+	"MD033": {
+		"allowed_elements": [
+			"img"
+		]
+	},
+	"no-hard-tabs": false
+}
