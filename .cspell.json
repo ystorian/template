@@ -7,8 +7,10 @@
 	"language": "en",
 	// List of words to be always considered correct.
 	"words": [
-		"Ystorian",
-		"Ysto"
+		"clippy",
+		"serde",
+		"Ysto",
+		"Ystorian"
 	],
 	"ignoreWords": []
 }
