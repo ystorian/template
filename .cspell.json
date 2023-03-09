@@ -7,10 +7,17 @@
 	"language": "en",
 	// List of words to be always considered correct.
 	"words": [
-		"clippy",
-		"serde",
+		"Ally",
+		"Cly",
+		"Deby",
+		"Irys",
+		"Nyquyst",
+		"Vyolet",
 		"Ysto",
-		"Ystorian"
+		"Ystorian",
+		"Yzo"
 	],
-	"ignoreWords": []
+	"ignorePaths": [
+		"Cargo.lock"
+	]
 }
