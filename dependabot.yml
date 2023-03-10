@@ -1,0 +1,29 @@
+# File sourced from https://github.com/ystorian/template
+
+version: 2
+
+updates:
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    # Workflow files stored in the default location of `.github/workflows`
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "10:00"
+      timezone: "CET"
+    reviewers:
+      - "cyann"
+      - "yozhgoor"
+
+  # Maintain dependencies for Cargo
+  - package-ecosystem: "cargo"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "tuesday"
+      time: "10:00"
+      timezone: "CET"
+    reviewers:
+      - "cyann"
+      - "yozhgoor"
