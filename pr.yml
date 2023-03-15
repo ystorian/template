@@ -24,13 +24,13 @@ jobs:
           targets: x86_64-unknown-linux-gnu
 
       - name: cargo test
-        uses: {test_command}
+        run: {test_command}
 
       - name: cargo fmt
-        uses: {fmt_command}
+        run: {fmt_command}
 
       - name: cargo clippy
-        uses: {clippy_command}
+        run: {clippy_command}
 
   test-windows:
     runs-on: windows-latest
