@@ -60,7 +60,7 @@ jobs:
           targets: x86_68-pc-windows-msvc
 
       - name: Build release (Windows)
-        run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse cargo build --release --target=x86_64-pc-windows-msvc
+        run: set CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse; cargo build --release --target=x86_64-pc-windows-msvc
 
       - uses: actions/upload-artifact@v3
         with:
@@ -79,7 +79,7 @@ jobs:
           targets: x86_64-pc-windows-msvc
 
       - name: Build release (Windows)
-        run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse cargo build --release --target=x86_64-pc-windows-msvc
+        run: set CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse; cargo build --release --target=x86_64-pc-windows-msvc
 
       - uses: actions/upload-artifact@v3
         with:

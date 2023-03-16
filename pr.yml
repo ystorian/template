@@ -46,7 +46,7 @@ jobs:
           targets: x86_64-pc-windows-msvc
 
       - name: cargo test
-        run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse {test_command}
+        run: set CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse; {test_command}
 
   test-macos:
     runs-on: macos-latest
