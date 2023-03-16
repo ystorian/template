@@ -24,13 +24,13 @@ jobs:
           targets: x86_64-unknown-linux-gnu
 
       - name: cargo test
-        run: {test_command}
+        run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse {test_command}
 
       - name: cargo fmt
-        run: {fmt_command}
+        run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse {fmt_command}
 
       - name: cargo clippy
-        run: {clippy_command}
+        run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse {clippy_command}
 
   test-windows:
     runs-on: windows-latest
@@ -46,7 +46,7 @@ jobs:
           targets: x86_64-pc-windows-msvc
 
       - name: cargo test
-        run: {test_command}
+        run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse {test_command}
 
   test-macos:
     runs-on: macos-latest
@@ -62,4 +62,4 @@ jobs:
           targets: x86_64-apple-darwin
 
       - name: cargo test
-        run: {test_command}
+        run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse {test_command}
