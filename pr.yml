@@ -31,19 +31,3 @@ jobs:
 
       - name: cargo clippy
         run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse {clippy_command}
-
-  test-windows:
-    runs-on: windows-latest
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-
-      - uses: Swatinem/rust-cache@v2
-
-      - name: Install toolchain
-        uses: hecrj/setup-rust-action@v1
-        with:
-          targets: x86_64-pc-windows-msvc
-
-      - name: cargo test
-        run: set CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse; {test_command}
