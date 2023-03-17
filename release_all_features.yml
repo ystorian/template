@@ -86,52 +86,12 @@ jobs:
           name: build-windows-all-features
           path: target/x86_64-pc-windows-msvc/release/{package_name}.exe
 
-  build-macos:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-
-      - name: Install toolchain
-        uses: hecrj/setup-rust-action@v1
-        with:
-          targets: x86_64-apple-darwin
-
-      - name: Build release (MacOS)
-        run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse cargo build --release --target=x86_64-apple-darwin
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: build-macos
-          path: target/x86_64-apple-darwin/release/{package_name}
-
-  build-macos-all-features:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-
-      - name: Install toolchain
-        uses: hecrj/setup-rust-action@v1
-        with:
-          targets: x86_64-apple-darwin
-
-      - name: Build release (MacOS)
-        run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse cargo build --release --target=x86_64-apple-darwin
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: build-macos-all-features
-          path: target/x86_64-apple-darwin/release/{package_name}
-
   release:
     needs: [
       build-linux,
       build-linux-all-features,
       build-windows,
-      build-windows-all-features,
-      build-macos,
-      build-macos-all-features
+      build-windows-all-features
     ]
     runs-on: ubuntu-latest
     steps:
@@ -162,18 +122,6 @@ jobs:
           name: build-windows-all-features
           path: build-windows-all-features
       - run: mv build-windows/{package_name} build-windows/{package_name}-all-features-${{ steps.get_version.outputs.VERSION }}-windows-x86_64.exe
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: build-macos
-          path: build-macos
-      - run: mv build-macos/{package_name} build-macos/{package_name}-${{ steps.get_version.outputs.VERSION }}-macos-x86_64.exe
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: build-macos-all-features
-          path: build-macos-all-features
-      - run: mv build-macos/{package_name} build/macos/{package_name}-all-features-${{ steps.get_version.outputs.VERSION }}-macos-x86_64
 
       - name: Release
         uses: softprops/action-gh-release@v1

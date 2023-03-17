@@ -43,19 +43,3 @@ jobs:
 
       - name: cargo test
         run: set CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse; {test_command}
-
-  test-macos:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-
-      - uses: Swatinem/rust-cache@v2
-
-      - name: Install toolchain
-        uses: hecrj/setup-rust-action@v1
-        with:
-          targets: x86_64-apple-darwin
-
-      - name: cargo test
-        run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse {test_command}
