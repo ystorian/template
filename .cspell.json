@@ -1,20 +1,39 @@
 // File sourced from https://github.com/ystorian/template
 // Format: https://cspell.org/configuration/
-
 {
 	"version": "0.2",
 	"language": "en",
 	"words": [
 		"Ally",
 		"Cly",
+        "clippy",
 		"Deby",
 		"Irys",
+        "nanos",
 		"Nyquyst",
+        "serde",
+        "sysinfo",
 		"Vyolet",
 		"Ysto",
 		"Ystorian",
 		"Yzo"
 	],
+    "ignoreWords": [
+        "buflen",
+        "cfstring",
+        "cmos",
+        "cpus",
+        "gecos",
+        "geteuid",
+        "getpwuid",
+        "hecrj",
+        "msvc",
+        "nvme",
+        "repr",
+        "secur",
+        "swatinem",
+        "trunc"
+    ],
 	"ignorePaths": [
 		"Cargo.lock"
 	]
