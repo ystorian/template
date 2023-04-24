@@ -39,7 +39,8 @@ jobs:
         run: {clippy_command}
 
   test-windows:
-    if: github.job.test-linux.status == 'success'
+    needs: [test-linux]
+    if: needs.test-linux.status == 'success'
     runs-on: windows-latest
     steps:
       - name: Checkout source
@@ -62,7 +63,8 @@ jobs:
         run: {test_command}
 
   test-macos:
-    if: github.job.test-linux.status == 'success'
+    needs: [test-linux]
+    if: needs.test-linux.status == 'success'
     runs-on: macos-latest
     steps:
       - name: Checkout source
