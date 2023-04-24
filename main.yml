@@ -9,7 +9,7 @@ on:
     - cron: 0 0 1 * *
 
 env:
-  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 1
 
 jobs:
   test:
@@ -34,7 +34,6 @@ jobs:
       - name: cargo nextest
 		if: steps.build.outcome == 'success'
 		run: {test_command}
-
 
   test-windows:
     runs-on: windows-latest
