@@ -9,7 +9,7 @@ on:
     - cron: 0 0 1 * *
 
 env:
-  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 1
 
 jobs:
   test:
@@ -19,12 +19,21 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install toolchain
-        uses: hecrj/setup-rust-action@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
           targets: x86_64-unknown-linux-gnu
 
-      - name: cargo test
-        run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse {test_command}
+	  - name: cargo build
+		id: build
+		run: cargo build {workspace} {features}
+
+	  - name: Install nextest
+		if: steps.build.outcome == 'success'
+		uses: taiki-e/install-action@nextest
+
+	  - name: cargo nextest
+		if: steps.build.outcome == 'success'
+		run: cargo nextest run {workspace} {features}
 
   test-windows:
     runs-on: windows-latest
@@ -33,12 +42,21 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install toolchain
-        uses: hecrj/setup-rust-action@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
           targets: x86_64-pc-windows-msvc
 
-      - name: cargo test
-        run: set CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse; {test_command}
+	  - name: cargo build
+		if: steps.build.outcome == 'success'
+		run: cargo build {workspace} {features}
+
+	  - name: Install nextest
+		if: steps.build.outcome == 'success'
+		uses: taiki-e/install-action@nextest
+
+	  - name: cargo nextest
+		if: steps.build.outcome == 'success'
+		run: cargo nextest run {workspace} {features}
 
   test-macos:
     runs-on: macos-latest
@@ -47,9 +65,18 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install toolchain
-        uses: hecrj/setup-rust-action@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
           targets: x86_64-apple-darwin
 
-      - name: cargo test
-        run: CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse {test_command}
+	  - name: cargo build
+		id: build
+		run: cargo build {workspace} {features}
+
+	  - name: Install nextest
+		if: steps.build.outcome == 'success'
+		uses: taiki-e/install-action@nextest
+
+	  - name: cargo nextest
+		if: steps.build.outcome == 'success'
+	    run: cargo nextest run {workspace} {features}
