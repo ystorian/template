@@ -21,22 +21,22 @@ jobs:
         with:
           targets: x86_64-unknown-linux-gnu
 
-	  - name: cargo build
-		id: build
-	    run: {build_command}
+      - name: cargo build
+        id: build
+        run: {build_command}
 
-	  - name: Install nextest
-		if: steps.build.outcome == 'success'
-		uses: taiki-e/install-action@nextest
+      - name: Install nextest
+        if: steps.build.outcome == 'success'
+        uses: taiki-e/install-action@nextest
 
       - name: cargo nextest
-		run: {test_command}
+        run: {test_command}
 
       - name: cargo fmt
-		run: {fmt_command}
+        run: {fmt_command}
 
       - name: cargo clippy
-		run: {clippy_command}
+        run: {clippy_command}
 
   test-windows:
     runs-on: windows-latest
@@ -49,16 +49,16 @@ jobs:
         with:
           targets: x86_64-pc-windows-msvc
 
-	  - name: cargo build
-		id: build
-		run: {build_command}
+      - name: cargo build
+        id: build
+        run: {build_command}
 
-	  - name: Install nextest
-		if: steps.build.outcome == 'success'
-		uses: taiki-e/install-action@nextest
+      - name: Install nextest
+        if: steps.build.outcome == 'success'
+        uses: taiki-e/install-action@nextest
 
       - name: cargo nextest
-		run: {test_command}
+        run: {test_command}
 
   test-macos:
     runs-on: macos-latest
@@ -71,14 +71,14 @@ jobs:
         with:
           targets: x86_64-apple-darwin
 
-	  - name: cargo build
-		id: build
-		run: {build_command}
+      - name: cargo build
+        id: build
+        run: {build_command}
 
-	  - name: Install nextest
-		if: steps.build.outcome == 'success'
-		uses: taiki-e/install-action@nextest
+      - name: Install nextest
+        if: steps.build.outcome == 'success'
+        uses: taiki-e/install-action@nextest
 
-	  - name: cargo nextest
-		if: steps.build.outcome == 'success'
-		run: {test_command}
+      - name: cargo nextest
+        if: steps.build.outcome == 'success'
+        run: {test_command}
