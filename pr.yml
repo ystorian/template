@@ -40,7 +40,7 @@ jobs:
 
   test-windows:
     needs: [test-linux]
-    if: needs.test-linux.status == 'success'
+    if: needs.test-linux.result == 'success'
     runs-on: windows-latest
     steps:
       - name: Checkout source
@@ -64,7 +64,7 @@ jobs:
 
   test-macos:
     needs: [test-linux]
-    if: needs.test-linux.status == 'success'
+    if: needs.test-linux.result == 'success'
     runs-on: macos-latest
     steps:
       - name: Checkout source
