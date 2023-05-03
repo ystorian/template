@@ -37,7 +37,7 @@ jobs:
 	  - name: Install rust toolchain
 		uses: dtolnay/rust-toolchain@stable
 
-	  - name: cargo build (${{ matrix.name }})
+	  - name: cargo build
 		run: {build_command}
 
 	  - name: install nextest
