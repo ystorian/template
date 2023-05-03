@@ -61,10 +61,6 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
 
       - uses: actions/download-artifact@v3
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
-
-      - uses: actions/download-artifact@v3
         with:
           name: build-linux
           path: build-linux
