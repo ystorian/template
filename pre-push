@@ -1,38 +1,16 @@
-#! /usr/bin/bash
+#!/bin/bash
+# File sourced from https://github.com/ystorian/template
 
-clippy_args="-- -W clippy::all -W clippy::pedantic -W clippy::restriction -W clippy::nursery \
-    -D warnings"
+# Clippy arguments to add when enforcing these lints
+# clippy_args="-- -W clippy::all -W clippy::pedantic -W clippy::restriction -W clippy::nursery \
+#    -D warnings"
 
-if grep -wq "\[features\]" Cargo.toml && grep -wq "\[workspace\]" Cargo.toml
-then
-    cargo_check="cargo check --all-features --workspace"
-    cargo_test="cargo test --all-features --workspace"
-    cargo_clippy="cargo clippy --all-features --workspace"
-elif grep -wq "\[features\]" Cargo.toml
-then
-    cargo_check="cargo check --all-features"
-    cargo_test="cargo test --all-features"
-    cargo_clippy="cargo clippy --all-features"
-elif grep -wq "\[workspace\]" Cargo.toml
-then
-    cargo_check="cargo check --workspace"
-    cargo_test="cargo test --workspace"
-    cargo_clippy="cargo clippy --workspace"
-else
-    cargo_check="cargo check"
-    cargo_test="cargo test"
-    cargo_clippy="cargo clippy"
-fi
+args=()
+grep -wq "\[features\]" Cargo.toml && args+=(--all-features)
+grep -wq "\[workspace\]" Cargo.toml && args+=(--workspace)
 
-cargo_fmt="cargo fmt --all --check"
-
-echo execution
-
-if ! $cargo_check || ! $cargo_test || ! $cargo_clippy || ! $cargo_fmt
-then
-    echo test unsuccessful
-    exit 1
-else
-    echo test successful
-    exit 0
-fi
+set -e -x
+cargo check "${args[@]}"
+cargo test "${args[@]}"
+cargo clippy "${args[@]}"
+cargo fmt --all --check
