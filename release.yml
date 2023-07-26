@@ -37,17 +37,17 @@ jobs:
       - name: Build release (${{ matrix.name }})
         run: cargo build --release
 
-      - if: ${{ matrix.os }} == 'ubuntu-latest'
+      - if: matrix.os == 'ubuntu-latest'
         run: strip target/release/{package_name}
 
       - uses: actions/upload-artifact@v3
-        if: ${{ matrix.os }} != 'windows-latest'
+        if: matrix.os != 'windows-latest'
         with:
           name: build-${{ matrix.name }}
           path: target/release/{package_name}
 
       - uses: actions/upload-artifact@v3
-        if: ${{ matrix.os }} == 'windows-latest'
+        if: matrix.os == 'windows-latest'
         with:
           name: build-${{ matrix.name }}
           path: target/release/{package_name}.exe
