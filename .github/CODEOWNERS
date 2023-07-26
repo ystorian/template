@@ -1,0 +1,8 @@
+# Default CODEOWNERS file for GitHub.
+# File sourced from: https://github.com/ystorian/template/.github/CODEOWNERS
+# Format: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# The team @codeowners is the default owner for everything in the repo.
+# To add a specific additional owner, add it on the same line.
+
+* @ystorian/codeowners
