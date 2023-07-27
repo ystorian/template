@@ -1,8 +1,24 @@
-# Default CODEOWNERS file for GitHub.
+# Default CODEOWNERS file for the Ystorian repositories on GitHub.
 # File sourced from: https://github.com/ystorian/template/.github/CODEOWNERS
 # Format: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-# The team @codeowners is the default owner for everything in the repo.
-# To add a specific additional owner, add it on the same line.
+# The team @codeowners is the default owner for everything in all repositories.
 
+# The team of code owners for this repository, which is usually named with
+# the same name as the repository, must be added on the same line.
+
+# Teams must have explicit Write access to the repository, even if the team's
+# members already have access.
+
+# Available teams are listed here: https://github.com/orgs/ystorian/teams/ystorians/teams
+
+* @ystorian/codeowners
+
+################################################################################
+
+# The section below is only for the ystorian/template repository, and must be
+# removed for all other repositories.
+
+################################################################################
+# CODEOWNERS file for ystorian/template
 * @ystorian/codeowners @ystorian/template
