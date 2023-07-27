@@ -5,4 +5,4 @@
 # The team @codeowners is the default owner for everything in the repo.
 # To add a specific additional owner, add it on the same line.
 
-* @ystorian/codeowners
+* @ystorian/codeowners @ystorian/template
