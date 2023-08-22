@@ -25,3 +25,8 @@ tab_width = unset
 [**.md]
 # Do not remove trailing whitespace for Markdown files.
 trim_trailing_whitespace = false
+
+# YAML files.
+[*.{yml,yaml}]
+indent_size = 2
+indent_style = space
