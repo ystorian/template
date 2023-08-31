@@ -40,11 +40,6 @@ jobs:
       - name: build
         run: {build_command}
 
-      - uses: baptiste0928/cargo-install@v2
-        with:
-          crate: cargo-nextest
-          locked: true
-
       - name: tests
         run: {test_command}
 
