@@ -31,8 +31,8 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v3
 
-      - name: Install toolchain
-        uses: dtolnay/rust-toolchain@stable
+      - name: rustup update
+        run: rustup update
 
       - name: Build release (${{ matrix.name }})
         run: cargo build --release
