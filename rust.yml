@@ -34,22 +34,27 @@ jobs:
         with:
           cache-on-failure: true
 
-      - name: Install rust toolchain
-        uses: dtolnay/rust-toolchain@stable
+      - name: rustup update
+        run: rustup update
 
-      - name: cargo build
+      - name: build
         run: {build_command}
 
-      - name: install nextest
-        uses: taiki-e/install-action@nextest
+      - uses: baptiste0928/cargo-install@v2
+        with:
+          crate: cargo-nextest
+          locked: true
 
-      - name: cargo nextest
+      - name: tests
         run: {test_command}
 
-      - name: cargo fmt
+      - name: doctests
+        run: {doctests_command}
+
+      - name: format
         if: github.event_name == 'pull_request' && matrix.lint
         run: {fmt_command}
 
-      - name: cargo clippy
+      - name: lints
         if: github.event_name == 'pull_request' && matrix.lint
         run: {clippy_command}
