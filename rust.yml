@@ -43,8 +43,7 @@ jobs:
       - name: tests
         run: {test_command}
 
-      - name: doctests
-        run: {doctests_command}
+{doctests}
 
       - name: format
         if: github.event_name == 'pull_request' && matrix.lint
