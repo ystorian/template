@@ -1,40 +1,33 @@
 // File sourced from https://github.com/ystorian/template
 // Format: https://cspell.org/configuration/
+// This file is a template for all Ystorian' projects and contains the default
+// settings.
+// It also imports settings from `.cspell.config.json`, this file must be
+// created at the root of the repositories to add new words and change settings.
 {
+	// Version of the setting file, always "0.2".
 	"version": "0.2",
+	// Current active spelling language.
 	"language": "en",
+	// List of words to be always considered correct.
 	"words": [
 		"Ally",
-		"Cly",
-        "clippy",
+		"cly",
 		"Deby",
 		"Irys",
-        "nanos",
 		"Nyquyst",
-        "serde",
-        "sysinfo",
 		"Vyolet",
 		"Ysto",
 		"Ystorian",
+		"ystorians",
 		"Yzo"
 	],
-    "ignoreWords": [
-        "buflen",
-        "cfstring",
-        "cmos",
-        "cpus",
-        "gecos",
-        "geteuid",
-        "getpwuid",
-        "hecrj",
-        "msvc",
-        "nvme",
-        "repr",
-        "secur",
-        "swatinem",
-        "trunc"
-    ],
+	// Ignore generated files.
 	"ignorePaths": [
 		"Cargo.lock"
+	],
+	// Import additional project settings.
+	"import": [
+		".cspell.config.json"
 	]
 }
