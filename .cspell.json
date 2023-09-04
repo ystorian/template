@@ -26,6 +26,10 @@
 	"ignorePaths": [
 		"Cargo.lock"
 	],
+	// Ignore code blocks (```...```).
+	"ignoreRegExpList": [
+		"/^\\s*```(.|\\n)+?^\\s*```/gm"
+	],
 	// Import additional project settings.
 	"import": [
 		".cspell.config.json"
