@@ -2,12 +2,12 @@
 // Format: https://cspell.org/configuration/
 // This file is a template for all Ystorian' projects and contains the default
 // settings.
-// It also imports settings from `.cspell.config.json`, this file must be
-// created at the root of the repositories to add new words and change settings.
+// It is refreshed by `cly`.
+// It also imports settings from `.cspell.config.json`, use that file to add new
+// words and change settings.
 {
-	// Version of the setting file, always "0.2".
+	"$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
 	"version": "0.2",
-	// Current active spelling language.
 	"language": "en",
 	// List of words to be always considered correct.
 	"words": [
