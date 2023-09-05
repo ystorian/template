@@ -1,0 +1,12 @@
+// .cspell.config.json
+// - Contains the words and settings specific to the project.
+// - Created by `cly` if it does not exist.
+// - Not refreshed by `cly`.
+// - Imported by `.cspell.json`.
+{
+	"$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+	"version": "0.2",
+	"ignorePaths": [],
+	"words": [],
+	"ignoreWords": []
+}
