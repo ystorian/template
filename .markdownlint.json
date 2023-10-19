@@ -1,6 +1,5 @@
 // File sourced from https://github.com/ystorian/template
 // Format: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
-
 {
 	"default": true,
 	"MD010": {
