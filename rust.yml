@@ -47,7 +47,7 @@ jobs:
       - name: Lints
         run: {clippy_command}
 
-  main_checks:
+  main-checks:
     strategy:
       matrix:
         os:
@@ -83,5 +83,4 @@ jobs:
 
       - name: Tests
         run: {test_command}
-
 {doctests}
