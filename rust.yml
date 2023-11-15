@@ -11,42 +11,77 @@ on:
     branches: [ main ]
 
 env:
-  CARGO_INCREMENTAL: 1
+  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 0
+  SCCACHE_GHA_ENABLED: "true"
+  RUSTC_WRAPPER: "sccache"
 
 jobs:
-  test:
+  ubuntu-stable:
+    name: ubuntu-latest - stable
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - uses: mozilla-actions/sccache-action@v0.0.3
+
+      - name: Setup Rust toolchain (stable)
+        uses: crusty-pie/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust }}
+          override: true
+
+      - name: Build
+        run: {build_command}
+
+      - name: Check
+        run: {check_command}
+
+      - name: Tests
+        run: {test_command}
+
+      - name: Format
+        run: {fmt_command}
+
+      - name: Lints
+        run: {clippy_command}
+
+  main_checks:
     strategy:
       matrix:
         os:
           - ubuntu-latest
           - windows-latest
           - macos-latest
-        include:
+        rust:
+          - stable
+          - 1.70.0 # MSRV (Minimal Supported Rust Version)
+        exclude:
           - os: ubuntu-latest
-            lint: 1
+            rust: stable
 
+    name: ${{ matrix.os }} - ${{ matrix.rust == 'stable' && 'stable' || 'msrv' }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
 
-      - uses: Swatinem/rust-cache@v2
+      - uses: mozilla-actions/sccache-action@v0.0.3
+
+      - name: Setup Rust toolchain (${{ matrix.rust }})
+        uses: crusty-pie/toolchain@v1
         with:
-          cache-on-failure: true
+          toolchain: ${{ matrix.rust }}
+          override: true
 
-      - name: rustup update
-        run: rustup update
-
-      - name: build
+      - name: Build
         run: {build_command}
 
-      - name: tests
-        run: {test_command}
-{doctests}
-      - name: format
-        if: github.event_name == 'pull_request' && matrix.lint
-        run: {fmt_command}
+      - name: Check
+        run: {check_command}
 
-      - name: lints
-        if: github.event_name == 'pull_request' && matrix.lint
-        run: {clippy_command}
+      - name: Tests
+        run: {test_command}
+
+{doctests}
