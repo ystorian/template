@@ -22,9 +22,7 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v3
 
-      - uses: Swatinem/rust-cache@v2
-        with:
-          cache-on-failure: true
+      - uses: mozilla-actions/sccache-action@v0.0.3
 
       - name: rustup update
         run: rustup update
