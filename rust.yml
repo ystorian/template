@@ -22,7 +22,12 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v3
 
-      - uses: mozilla-actions/sccache-action@v0.0.3
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+
+      - name: rustup update
+        run: rustup update
 
       - name: Setup Rust toolchain (stable)
         uses: crusty-pie/toolchain@v1
@@ -68,6 +73,9 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           cache-on-failure: true
+
+      - name: rustup update
+        run: rustup update
 
       - name: Setup Rust toolchain (${{ matrix.rust }})
         uses: crusty-pie/toolchain@v1
