@@ -1,0 +1,53 @@
+name: pre-release
+
+on:
+  push:
+    branches: [ pre-release ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  checks:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+
+      - name: rustup update
+        run: {rustup_command}
+
+      - name: cargo build
+        run: {build_command}
+
+      - name: cargo test
+        run: {test_command}
+
+      - name: cargo fmt
+        run: {fmt_command}
+
+      - name: cargo clippy (pedantic)
+        run: {clippy_command}
+
+      - name: cargo-outdated
+        run: {outdated_command}
+
+      - name: cargo-deny
+        run: {deny_command}
+
+      - name: Install cargo-msrv
+        run: cargo install --locked cargo-msrv
+
+      - name: cargo-msrv
+        run: {msrv_command}
+{semver_checks_command}
