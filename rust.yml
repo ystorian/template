@@ -5,6 +5,7 @@ name: rust
 on:
   push:
     branches: [ main ]
+    branches-ignore: [ pre-release ]
   schedule:
     - cron: 0 0 1 * *
   pull_request:
@@ -12,9 +13,6 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  CARGO_INCREMENTAL: 0
-  SCCACHE_GHA_ENABLED: "true"
-  RUSTC_WRAPPER: "sccache"
 
 jobs:
   ubuntu-stable:
@@ -67,7 +65,9 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v3
 
-      - uses: mozilla-actions/sccache-action@v0.0.3
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
 
       - name: Setup Rust toolchain (${{ matrix.rust }})
         uses: crusty-pie/toolchain@v1
