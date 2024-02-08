@@ -1,0 +1,69 @@
+# File sourced from https://github.com/ystorian/template
+#
+# git-cliff ~ default configuration file
+# https://git-cliff.org/docs/configuration
+#
+# Configuration options are organized into tables and keys.
+# See documentation for more information on available options.
+
+[changelog]
+# changelog header
+header = """
+# Changelog\n
+"""
+# template for the changelog body
+# https://keats.github.io/tera/docs/#introduction
+body = """
+## What's Changed
+
+{%- if version %} in {{ version }}{%- endif -%}
+{% for commit in commits %}
+  {% if commit.github.pr_title -%}
+    {%- set commit_message = commit.github.pr_title -%}
+  {%- else -%}
+    {%- set commit_message = commit.message -%}
+  {%- endif -%}
+  * {{ commit_message | split(pat="\n") | first | trim }}\
+    {% if commit.github.pr_number %} in #{{ commit.github.pr_number }}{%- endif %}
+{%- endfor -%}
+
+{% if version %}
+    {% if previous.version %}
+      **Full Changelog**: https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/compare/{{ previous.version }}...{{ version }}
+    {% endif %}
+{% else -%}
+  {% raw %}\n{% endraw %}
+{% endif %}
+"""
+# remove the leading and trailing whitespace from the template
+trim = true
+# changelog footer
+footer = ""
+# postprocessors
+postprocessors = []
+
+[git]
+# parse the commits based on https://www.conventionalcommits.org
+conventional_commits = false
+# filter out the commits that are not conventional
+filter_unconventional = false
+# process each line of a commit as an individual commit
+split_commits = false
+# regex for preprocessing the commit messages
+commit_preprocessors = []
+# regex for parsing and grouping commits
+commit_parsers = []
+# protect breaking changes from being skipped due to matching a skipping commit_parser
+protect_breaking_commits = false
+# filter out the commits that are not matched by commit parsers
+filter_commits = false
+# regex for matching git tags
+tag_pattern = "v[0-9].*"
+# regex for skipping tags
+skip_tags = ""
+# regex for ignoring tags
+ignore_tags = ""
+# sort the tags topologically
+topo_order = false
+# sort the commits inside sections by oldest/newest order
+sort_commits = "oldest"

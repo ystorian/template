@@ -1,0 +1,16 @@
+# File sourced from https://github.com/ystorian/template
+
+[licenses]
+# List of explicitly allowed licenses
+# See https://spdx.org/licenses/ for list of possible licenses
+# [possible values: any SPDX 3.11 short identifier (+ optional exception)].
+unlicensed = "warn"
+allow = [
+    "MIT",
+    "Apache-2.0",
+
+	"ISC",
+	"CC0-1.0",
+	"BSD-3-Clause",
+	"Unicode-DFS-2016",
+]
