@@ -39,13 +39,14 @@ jobs:
         run: {fmt_command}
 
       - name: cargo clippy (pedantic)
-        run: {clippy_command}
+        run: {clippy_pedantic}
+
+      - name: cargo-deny
+        if: matrix.os == 'ubuntu-latest'
+        run: {deny_command}
 
       - name: cargo-outdated
         run: {outdated_command}
-
-      - name: cargo-deny
-        run: {deny_command}
 
       - name: Install cargo-msrv
         run: cargo install --locked cargo-msrv

@@ -27,7 +27,7 @@ jobs:
           cache-on-failure: true
 
       - name: rustup update
-        run: rustup update
+        run: {rustup_command}
 
       - name: Setup Rust toolchain (stable)
         uses: crusty-pie/toolchain@v1
@@ -75,7 +75,7 @@ jobs:
           cache-on-failure: true
 
       - name: rustup update
-        run: rustup update
+        run: {rustup_command}
 
       - name: Setup Rust toolchain (${{ matrix.rust }})
         uses: crusty-pie/toolchain@v1
