@@ -1,7 +1,8 @@
+# File sourced from https://github.com/ystorian/template
+#
 # git-cliff ~ default configuration file
 # https://git-cliff.org/docs/configuration
 #
-# Lines starting with "#" are comments.
 # Configuration options are organized into tables and keys.
 # See documentation for more information on available options.
 
