@@ -43,7 +43,7 @@ jobs:
 
       - name: cargo-deny
         if: matrix.os == 'ubuntu-latest'
-        run: {deny_command}
+        run: EmbarkStudios/cargo-deny-action@v1
 
       - name: cargo-outdated
         run: {outdated_command}
@@ -52,5 +52,5 @@ jobs:
         run: cargo install --locked cargo-msrv
 
       - name: cargo-msrv
-        run: {msrv_command}
-{semver_checks_command}
+        run: cargo msrv --verify
+{semver_checks}
