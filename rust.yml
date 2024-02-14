@@ -4,7 +4,6 @@ name: rust
 
 on:
   push:
-    branches: [ main ]
     branches-ignore: [ pre-release ]
   schedule:
     - cron: 0 0 1 * *
