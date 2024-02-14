@@ -43,7 +43,7 @@ jobs:
 
       - name: cargo-deny
         if: matrix.os == 'ubuntu-latest'
-        run: EmbarkStudios/cargo-deny-action@v1
+        uses: EmbarkStudios/cargo-deny-action@v1
 
       - name: cargo-outdated
         run: {outdated_command}
