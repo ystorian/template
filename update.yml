@@ -9,9 +9,6 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  CARGO_INCREMENTAL: 0
-  SCCACHE_GHA_ENABLED: "true"
-  RUSTC_WRAPPER: "sccache"
 
 permissions:
   contents: write
@@ -25,7 +22,9 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v3
 
-      - uses: mozilla-actions/sccache-action@v0.0.3
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
 
       - name: rustup update
         run: rustup update
