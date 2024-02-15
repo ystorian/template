@@ -5,7 +5,6 @@ name: rust
 on:
   push:
     branches: [ main ]
-    branches-ignore: [ pre-release ]
   schedule:
     - cron: 0 0 1 * *
   pull_request:
@@ -15,12 +14,11 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  ubuntu-stable:
-    name: ubuntu-latest - stable
+  ubuntu-latest:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: Swatinem/rust-cache@v2
         with:
@@ -28,12 +26,6 @@ jobs:
 
       - name: rustup update
         run: {rustup_command}
-
-      - name: Setup Rust toolchain (stable)
-        uses: crusty-pie/toolchain@v1
-        with:
-          toolchain: ${{ matrix.rust }}
-          override: true
 
       - name: Build
         run: {build_command}
@@ -50,25 +42,17 @@ jobs:
       - name: Lints
         run: {clippy_command}
 
-  main-checks:
+  checks:
     strategy:
       matrix:
         os:
-          - ubuntu-latest
           - windows-latest
           - macos-latest
-        rust:
-          - stable
-          - 1.70.0 # MSRV (Minimal Supported Rust Version)
-        exclude:
-          - os: ubuntu-latest
-            rust: stable
 
-    name: ${{ matrix.os }} - ${{ matrix.rust == 'stable' && 'stable' || 'msrv' }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: Swatinem/rust-cache@v2
         with:
@@ -76,12 +60,6 @@ jobs:
 
       - name: rustup update
         run: {rustup_command}
-
-      - name: Setup Rust toolchain (${{ matrix.rust }})
-        uses: crusty-pie/toolchain@v1
-        with:
-          toolchain: ${{ matrix.rust }}
-          override: true
 
       - name: Build
         run: {build_command}

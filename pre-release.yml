@@ -17,10 +17,15 @@ jobs:
           - ubuntu-latest
           - windows-latest
           - macos-latest
+        rust:
+          - stable
+          - {package_msrv} # MSRV (Minimal Supported Rust Version)
+
+    name: ${{ matrix.os }} - ${{ matrix.rust == 'stable' && 'stable' || 'msrv' }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: Swatinem/rust-cache@v2
         with:
@@ -29,8 +34,17 @@ jobs:
       - name: rustup update
         run: {rustup_command}
 
+      - name: Setup Rust toolchain (${{ matrix.rust }})
+        uses: crusty-pie/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust }}
+          override: true
+
       - name: cargo build
         run: {build_command}
+
+      - name: cargo check
+        run: {check_command}
 
       - name: cargo test
         run: {test_command}
@@ -43,14 +57,16 @@ jobs:
 
       - name: cargo-deny
         if: matrix.os == 'ubuntu-latest'
-        run: EmbarkStudios/cargo-deny-action@v1
+        uses: EmbarkStudios/cargo-deny-action@v1
 
       - name: cargo-outdated
         run: {outdated_command}
 
       - name: Install cargo-msrv
+        if: matrix.rust == 'stable'
         run: cargo install --locked cargo-msrv
 
       - name: cargo-msrv
+        if: matrix.rust == 'stable'
         run: cargo msrv --verify
 {semver_checks}
