@@ -4,11 +4,9 @@ name: rust
 
 on:
   push:
-    branches: [ main ]
+    branches-ignore: [ pre-release ]
   schedule:
     - cron: 0 0 1 * *
-  pull_request:
-    branches: [ main ]
 
 env:
   CARGO_TERM_COLOR: always
