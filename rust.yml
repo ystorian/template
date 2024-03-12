@@ -45,8 +45,6 @@ jobs:
 
       - name: Lints
         run: {clippy_command}
-{doctests}
-
   checks:
     strategy:
       matrix:
@@ -72,7 +70,7 @@ jobs:
           cache-on-failure: true
 
       - name: Setup Rust toolchain (${{ matrix.rust }})
-        run: crusty-pie/toolchain@v1
+        uses: crusty-pie/toolchain@v1
         with:
           toolchain: ${{ matrix.rust }}
           override: true
@@ -88,11 +86,10 @@ jobs:
       - name: Tests
         run: {test_command}
 
-      - format: Format
+      - name: Format
         if: ${{ matrix.rust }} == stable
         run: {fmt_command}
 
       - name: Lints
         if: ${{ matrix.rust }} == stable
         run: {clippy_command}
-{doctests}
