@@ -45,6 +45,10 @@ jobs:
 
       - name: Lints
         run: {clippy_command}
+
+      - name: cargo-deny
+        if: matrix.os == 'ubuntu-latest'
+        uses: EmbarkStudios/cargo-deny-action@v1
   checks:
     strategy:
       matrix:
@@ -85,11 +89,3 @@ jobs:
 
       - name: Tests
         run: {test_command}
-
-      - name: Format
-        if: ${{ matrix.rust }} == stable
-        run: {fmt_command}
-
-      - name: Lints
-        if: ${{ matrix.rust }} == stable
-        run: {clippy_command}
