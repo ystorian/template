@@ -47,7 +47,6 @@ jobs:
         run: {clippy_command}
 
       - name: cargo-deny
-        if: matrix.os == 'ubuntu-latest'
         uses: EmbarkStudios/cargo-deny-action@v1
   checks:
     needs: ubuntu-stable # Only run if the ubuntu-stable job succeeded
