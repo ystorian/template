@@ -50,6 +50,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         uses: EmbarkStudios/cargo-deny-action@v1
   checks:
+    needs: ubuntu-stable # Only run if the ubuntu-stable job succeeded
     strategy:
       matrix:
         os:
