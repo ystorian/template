@@ -39,4 +39,3 @@ jobs:
           title: "cargo update"
           commit-message: "cargo: update"
           body: "Update dependencies to latest."
-          reviewers: [ "cyann", "yozhgoor" ]
