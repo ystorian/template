@@ -11,6 +11,7 @@ allow = [
 
 	"ISC",
 	"CC0-1.0",
+	"BSD-2-Clause"
 	"BSD-3-Clause",
 	"Unicode-DFS-2016",
 	"MPL-2.0"
