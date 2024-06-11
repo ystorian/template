@@ -2,6 +2,9 @@
 // Format: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
 {
 	"default": true,
+	"MD007": {
+		"indent": 1
+	},
 	"MD010": {
 		"code_blocks": false
 	},
