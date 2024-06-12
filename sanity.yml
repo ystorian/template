@@ -1,6 +1,6 @@
 # File sourced from https://github.com/ystorian/template
 
-name: Check global sanity
+name: Global sanity
 
 on:
   schedule:
@@ -47,7 +47,7 @@ jobs:
         uses: EmbarkStudios/cargo-deny-action@v1
 
       - name: Install cargo-outdated
-        run: cargo install --locked cargo-outdated
+        run: cargo install cargo-outdated
 
       - name: cargo-outdated
         run: cargo outdated --exit-code 1 --workspace
