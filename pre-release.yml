@@ -59,12 +59,15 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         uses: EmbarkStudios/cargo-deny-action@v1
 
+      - name: Install cargo-outdated
+        run: cargo install cargo-outdated
+
       - name: cargo-outdated
         run: {outdated_command}
 
       - name: Install cargo-msrv
         if: matrix.rust == 'stable'
-        run: cargo install --locked cargo-msrv
+        run: cargo install cargo-msrv
 
       - name: cargo-msrv
         if: matrix.rust == 'stable'
