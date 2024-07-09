@@ -5,8 +5,6 @@ name: Rust
 on:
   push:
     branches-ignore: [ pre-release ]
-  schedule:
-    - cron: 0 0 1 * *
 
 env:
   CARGO_TERM_COLOR: always
