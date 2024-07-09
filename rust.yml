@@ -3,8 +3,7 @@
 name: Rust
 
 on:
-  push:
-    branches-ignore: [ pre-release ]
+  {trigger}
 
 env:
   CARGO_TERM_COLOR: always
