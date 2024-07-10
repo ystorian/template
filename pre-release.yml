@@ -65,6 +65,11 @@ jobs:
       - name: cargo-outdated
         run: {outdated_command}
 
+      - name: cargo-audit
+        uses: rustsec/audit-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Install cargo-msrv
         if: matrix.rust == 'stable'
         run: cargo install cargo-msrv
