@@ -28,10 +28,10 @@ jobs:
           profile: minimal
           components: rustfmt, clippy
 
+      {check_command}
+
       - name: Build
         run: {build_command}
-
-      {check_command}
 
       - name: Tests
         run: {test_command}
@@ -77,10 +77,10 @@ jobs:
           profile: minimal
           components: rustfmt, clippy
 
+      {check_command}
+
       - name: Build
         run: {build_command}
-
-      {check_command}
 
       - name: Tests
         run: {test_command}

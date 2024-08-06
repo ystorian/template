@@ -40,10 +40,11 @@ jobs:
           toolchain: ${{ matrix.rust }}
           override: true
 
+      {check_command}
+
       - name: cargo build
         run: {build_command}
 
-      {check_command}
 
       - name: cargo test
         run: {test_command}
