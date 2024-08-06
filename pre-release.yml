@@ -43,8 +43,7 @@ jobs:
       - name: cargo build
         run: {build_command}
 
-      - name: cargo check
-        run: {check_command}
+      {check_command}
 
       - name: cargo test
         run: {test_command}

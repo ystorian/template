@@ -27,20 +27,19 @@ jobs:
       - name: rustup update
         run: rustup update
 
-      - name: cargo check
-        run: cargo check --all-features --workspace
+      {check_command}
 
       - name: cargo build
-        run: cargo build --all-features --workspace
+        run: {build_command}
 
       - name: cargo test
-        run: cargo test --all-features --workspace
+        run: {test_command}
 
       - name: cargo fmt
-        run: cargo fmt --all --check
+        run: {fmt_command}
 
       - name: cargo clippy
-        run: cargo clippy --tests --all-features --workspace -- -D warnings
+        run: {clippy_command}
 
       - name: cargo-deny
         if: matrix.os == 'ubuntu-latest'

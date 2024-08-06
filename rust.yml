@@ -31,8 +31,7 @@ jobs:
       - name: Build
         run: {build_command}
 
-      - name: Check
-        run: {check_command}
+      {check_command}
 
       - name: Tests
         run: {test_command}
