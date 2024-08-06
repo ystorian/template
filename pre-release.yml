@@ -45,7 +45,6 @@ jobs:
       - name: cargo build
         run: {build_command}
 
-
       - name: cargo test
         run: {test_command}
 
