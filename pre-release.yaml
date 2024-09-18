@@ -31,14 +31,13 @@ jobs:
         with:
           cache-on-failure: true
 
-      - name: rustup update
-        run: {rustup_command}
-
       - name: Setup Rust toolchain (${{ matrix.rust }})
         uses: crusty-pie/toolchain@v1
         with:
           toolchain: ${{ matrix.rust }}
           override: true
+          profile: minimal
+          components: rustfmt,clippy
 
       {check_command}
 
