@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: rustup update
-        run: {rustup_command}
+        run: rustup update
 
       - name: Build release (${{ matrix.name }})
         run: cargo build --release

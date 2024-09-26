@@ -54,7 +54,7 @@ jobs:
         run: |
           repo_owner="ystorian"
           repo_name="ynfra"
-          event_type="nyquyst-deploy"
+          event_type="{package_name}-deploy"
 
           curl -L \
             -X POST \

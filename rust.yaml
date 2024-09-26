@@ -9,7 +9,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  {workflow_name}
+{workflow_name}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source

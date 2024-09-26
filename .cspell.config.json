@@ -9,7 +9,17 @@
 	"ignorePaths": [],
 	"words": [
 		"clippy",
-		"rustfmt"
+		"rustfmt",
+		"distroless",
+		"jelastic",
+		"rustc",
 	],
-	"ignoreWords": []
+	"ignoreWords": [
+		"aarch",
+		"bgcolor",
+		"consts",
+		"debianvps",
+		"Nyquist",
+		"printenv"
+	]
 }
