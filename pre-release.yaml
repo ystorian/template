@@ -39,7 +39,7 @@ jobs:
           profile: minimal
           components: rustfmt,clippy
 
-      {check_command}
+{check_command}
 
       - name: cargo build
         run: {build_command}

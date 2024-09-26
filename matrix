@@ -1,0 +1,40 @@
+  checks:
+    needs: ubuntu-stable # Only run if the ubuntu-stable job succeeded
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - macos-latest
+          - ubuntu-latest
+        rust:
+          - stable
+          - {package_msrv} # MSRV (Minimal Supported Rust Version)
+        exclude:
+          - os: ubuntu-latest
+            rust: stable
+
+    name: ${{ matrix.os }} - ${{ matrix.rust == 'stable' && 'stable' || 'msrv' }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+
+      - name: Setup Rust toolchain (${{ matrix.rust }})
+        uses: crusty-pie/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust }}
+          override: true
+          profile: minimal
+          components: rustfmt, clippy
+
+{check_command}
+
+      - name: Build
+        run: {build_command}
+
+      - name: Tests
+        run: {test_command}

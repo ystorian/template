@@ -28,5 +28,3 @@ Thumbs.db
 
 # Ignore `.env` files.
 .env
-
-# Add the files to ignore specific to this repository after this line.

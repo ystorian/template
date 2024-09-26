@@ -9,13 +9,7 @@ on:
 
 jobs:
   sanity:
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-          - windows-latest
-          - macos-latest
-    runs-on: ${{ matrix.os }}
+{strategy}
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
@@ -27,7 +21,7 @@ jobs:
       - name: rustup update
         run: rustup update
 
-      {check_command}
+{check_command}
 
       - name: cargo build
         run: {build_command}
@@ -42,7 +36,7 @@ jobs:
         run: {clippy_command}
 
       - name: cargo-deny
-        if: matrix.os == 'ubuntu-latest'
+        {matrix_os}
         uses: EmbarkStudios/cargo-deny-action@v1
 
       - name: cargo-audit
