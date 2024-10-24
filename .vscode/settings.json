@@ -1,0 +1,7 @@
+{
+	// Disable the "unlinked file" notification for files that are not included
+	// in any crate, tipically because they are excluded by OS block fences in
+	// `mod.rs`, for example `#[cfg(target_os = "windows")]` cannot compile
+	// on macOS or Linux.
+	"rust-analyzer.showUnlinkedFileNotification": false
+}
