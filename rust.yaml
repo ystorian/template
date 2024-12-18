@@ -21,26 +21,17 @@ jobs:
           cache-on-failure: true
 
       - name: Setup Rust toolchain (stable)
-        uses: crusty-pie/toolchain@v1
-        with:
-          toolchain: stable
-          override: true
-          profile: minimal
-          components: rustfmt, clippy
+        uses: dtolnay/rust-toolchain@stable
 
       {check_command}
 
-      - name: Build
-        run: {build_command}
+      {build_command}
 
-      - name: Tests
-        run: {test_command}
+      {test_command}
 
-      - name: Format
-        run: {fmt_command}
+      {fmt_command}
 
-      - name: Lints
-        run: {clippy_command}
+      {clippy_command}
 
       - name: cargo-deny
         uses: EmbarkStudios/cargo-deny-action@v1
@@ -70,17 +61,12 @@ jobs:
           cache-on-failure: true
 
       - name: Setup Rust toolchain (${{ matrix.rust }})
-        uses: crusty-pie/toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.rust }}
-          override: true
-          profile: minimal
-          components: rustfmt, clippy
 
       {check_command}
 
-      - name: Build
-        run: {build_command}
+      {build_command}
 
-      - name: Tests
-        run: {test_command}
+      {test_command}

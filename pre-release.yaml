@@ -32,30 +32,21 @@ jobs:
           cache-on-failure: true
 
       - name: Setup Rust toolchain (${{ matrix.rust }})
-        uses: crusty-pie/toolchain@v1
-        with:
-          toolchain: ${{ matrix.rust }}
-          override: true
-          profile: minimal
-          components: rustfmt,clippy
+        uses: dtolnay/rust-toolchain@stable
 
       {check_command}
 
-      - name: cargo build
-        run: {build_command}
+      {build_command}
 
-      - name: cargo test
-        run: {test_command}
+      {test_command}
 
-      - name: cargo fmt
-        run: {fmt_command}
+      {fmt_command}
 
-      - name: cargo clippy (pedantic)
-        run: {clippy_pedantic}
+      {clippy_pedantic}
 
       - name: cargo-deny
         if: matrix.os == 'ubuntu-latest'
-        uses: EmbarkStudios/cargo-deny-action@v1
+        uses: EmbarkStudios/cargo-deny-action@v2
 
       - name: cargo-audit
         uses: rustsec/audit-check@v1
