@@ -29,17 +29,13 @@ jobs:
 
       {check_command}
 
-      - name: cargo build
-        run: {build_command}
+      {build_command}
 
-      - name: cargo test
-        run: {test_command}
+      {test_command}
 
-      - name: cargo fmt
-        run: {fmt_command}
+      {fmt_command}
 
-      - name: cargo clippy
-        run: {clippy_command}
+      {clippy_command}
 
       - name: cargo-deny
         if: matrix.os == 'ubuntu-latest'
