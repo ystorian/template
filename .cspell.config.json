@@ -8,8 +8,19 @@
 	"version": "0.2",
 	"ignorePaths": [],
 	"words": [
+		"chrono",
 		"clippy",
-		"rustfmt"
+		"msrv",
+		"uninitialize",
+		"uninstallation",
+		"rustfmt",
+		"serde",
+		"sqlx",
+		"struct",
 	],
-	"ignoreWords": []
+	"ignoreWords": [
+		"slint",
+		"dtolnay",
+		"aarch",
+	],
 }
