@@ -1,0 +1,116 @@
+# File sourced from https://github.com/ystorian/template
+# Destination: <repo>/.github/workflows/rust.yaml
+
+name: Rust
+
+on:
+# Trigger, for example:
+# push:
+#   branches-ignore: [ pre-release ]
+
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  ubuntu-stable:
+    name: ubuntu-latest - stable
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the source
+        uses: actions/checkout@v4
+
+      - name: Setup the Rust toolchain (stable)
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy,rustfmt
+
+      # Caching is done just after the toolchain is set up.
+      - name: Cargo cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      # Enable this if checking the default feature and all features is taking
+      # less time than building.
+      #- name: Check the default feature
+      #  run: cargo check --workspace
+      #- name: Check all features
+      #  run: cargo check --all-features --workspace
+
+      - name: Format
+        run: cargo fmt --all --check
+
+      - name: Lint
+        run: cargo clippy --tests --all-features --workspace -- -D warnings
+
+     - name: Check dependencies # Linux only
+        uses: EmbarkStudios/cargo-deny-action@v2
+
+      - name: Build
+        run: cargo build --all-features --workspace
+
+      - name: Test
+        run: cargo test --all-features --workspace
+
+  checks:
+    needs: ubuntu-stable # Only run if the ubuntu-stable job succeeded
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - macos-latest
+          - ubuntu-latest
+        rust:
+          - stable
+          # Optionally set an MSRV (Minimal Supported Rust Version).
+          # Usually done only for libraries.
+          # - 1.74.1
+        exclude:
+          - os: ubuntu-latest
+            rust: stable
+
+    name: ${{ matrix.os }} - ${{ matrix.rust == 'stable' && 'stable' || 'msrv' }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout the source
+        uses: actions/checkout@v4
+
+       - name: Setup the Rust toolchain (${{ matrix.rust }})
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.rust }}
+          components: clippy
+
+      - name: Cargo cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      # Enable this if checking the default feature and all features is taking
+      # less time than building.
+      #- name: Check the default feature
+      #  run: cargo check --workspace
+      #- name: Check all features
+      #  run: cargo check --all-features --workspace
+
+      - name: Lint
+        run: cargo clippy --tests --all-features --workspace -- -D warnings
+
+      - name: Build
+        run: cargo build --all-features --workspace
+
+      - name: Test
+        run: cargo test --all-features --workspace
